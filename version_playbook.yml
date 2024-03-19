@@ -1,0 +1,13 @@
+- name: Cisco show version example
+  hosts: R1:R2:R3
+  gather_facts: false
+
+  tasks:
+    - name: run show version on the routers
+      ios_command:
+        commands: show version | incl Version
+      register: output
+
+    - name: print output
+      debug:
+        var: output.stdout_lines
